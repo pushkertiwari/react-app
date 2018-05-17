@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 //import logo from './logo.svg';
 // import Loader from 'react-loader-spinner';
 import { BootstrapTable, TableHeaderColumn, SearchField, ClearSearchButton } from 'react-bootstrap-table';
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       active: false,
     };
+    this.handleCLick = this.handleCLick.bind(this);
     }
 
   handleClearButtonClick = (onClick) => {
@@ -32,28 +34,51 @@ class App extends Component {
       name: "Product2",
       price: 80
      }];
+  lists = [{
+    name: "home"
+  }, {
+    name: "about"
+  }];
   createCustomClearButton = (onClick) => {
     return (
-      <span>Filter<ClearSearchButton
+     <ClearSearchButton
         btnText='MyClear'
         btnContextual='btn-warning'
         className='my-custom-class'
-        onClick={e => this.handleClearButtonClick(onClick)} /></span>
+        onClick={e => this.handleClearButtonClick(onClick)} />
     );
   }
   createCustomSearchField = (props) => {
     return (
-      <SearchField
+     <SearchField
         className='my-custom-class'
         style={{ visibility: this.state.active === true ? 'visible' : 'hidden' }}
-        placeholder='Input a number' />
+        placeholder='Input a number' onKeyUp={this.props.search} />
     );
+  }
+  getValue() {
+    return ReactDOM.findDOMNode(this).value;
+  }
+  setValue(value) {
+    alert(value);
+    ReactDOM.findDOMNode(this).value = value;
+  }
+  handleCLick(e) {
+    e.preventDefault();
+    this.props.history.push('/' + e.target.dataset.id)
   }
 
 
   rowClassNameFormat(row, rowIdx) {
   return rowIdx % 2 === 0 ? 'td-column-function-even-example' : 'td-column-function-odd-example';
-}
+  }
+
+  addListing() {
+    return (
+        this.lists.map((item, i) =>
+        <li data-id={item.name} onClick={this.handleCLick} key={i}>{item.name}</li>)
+    );
+  }
 
   render() {
     const options = {
@@ -61,16 +86,33 @@ class App extends Component {
       clearSearchBtn: this.createCustomClearButton,
       searchField: this.createCustomSearchField
     };
+
     return (
-      <div className="container-fluid">
+      <div className="container">
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand" style={{'cursor':'pointer'}} onClick={this.handleCLick}>Sotch Header</a>
+            </div>
+            <div className="navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul className="nav navbar-nav">
+                {/* <li data-id={'home'} onClick={this.handleCLick}>Home</li>
+                <li data-id={'about'} onClick={this.handleCLick}>About</li> */}
+                {this.addListing()}
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="container-fluid">
       <BootstrapTable data={this.products} options={options} search bordered={false} trClassName={this.rowClassNameFormat} >
       <TableHeaderColumn dataField='id' isKey>Product ID</TableHeaderColumn>
       <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
       <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
         </BootstrapTable>
+        </div>
     </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
