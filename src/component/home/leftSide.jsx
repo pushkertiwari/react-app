@@ -25,7 +25,6 @@ class LeftSide extends Component {
     handleCLick(e) {
         e.preventDefault();
         this.props.updateStateProp(e.target.dataset.id);
-        alert('ok');
         // this.props.history.push('/' + e.target.dataset.id)
     }
     addListing() {
@@ -37,9 +36,8 @@ class LeftSide extends Component {
     render() {
         return (
             <div>
-                <button testprop={this.state.test} onClick={this.addToCart}>Child.method()</button>
+                <button  onClick={this.addToCart}>Child.method()</button>
                 {/* <button onClick={this.props.updateStateProp}>CLICK</button> */}
-                <h3>{this.props.myDataProp}</h3>
                 {this.addListing()}
             </div>
         );
