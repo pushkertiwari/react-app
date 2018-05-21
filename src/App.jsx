@@ -92,7 +92,7 @@ class App extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" style={{'cursor':'pointer'}} onClick={this.handleCLick}>Sotch Header</a>
+              <a className="navbar-brand" style={{'cursor':'pointer'}} >Sotch Header</a>
             </div>
             <div className="navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">

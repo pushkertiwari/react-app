@@ -44,8 +44,8 @@ class LeftSide extends Component {
                 <div className="container">
                     <div className="container-fluid">
                         {this.state.myDataProp}
-                        <button onClick={this.addToCart}>Method</button>
-                        <button onClick={this.deleteRow.bind(this)}>Delete Row</button>
+                        <button className="btn btn-primary" onClick={this.addToCart}>Method</button>
+                        <button className="btn btn-danger" onClick={this.deleteRow.bind(this)}>Delete Row</button>
                         {this.addListing()}
                     </div>
                 </div>
