@@ -19,13 +19,18 @@ class LeftSide extends Component {
         e.preventDefault();
         console.log(this.props.headerProp);
         this.setState({
-            test:"gdsdgdsgdsgdsg"
+            test:"testing"
         });
     }
     handleCLick(e) {
         e.preventDefault();
         this.props.updateStateProp(e.target.dataset.id);
-        // this.props.history.push('/' + e.target.dataset.id)
+    }
+    deleteRow(e) {
+        e.preventDefault();
+        if (this.state.myDataProp !== null) {
+            this.props.updateStateProp('');
+        }
     }
     addListing() {
         return (
@@ -36,9 +41,14 @@ class LeftSide extends Component {
     render() {
         return (
             <div>
-                <button  onClick={this.addToCart}>Child.method()</button>
-                {/* <button onClick={this.props.updateStateProp}>CLICK</button> */}
-                {this.addListing()}
+                <div className="container">
+                    <div className="container-fluid">
+                        {this.state.myDataProp}
+                        <button onClick={this.addToCart}>Method</button>
+                        <button onClick={this.deleteRow.bind(this)}>Delete Row</button>
+                        {this.addListing()}
+                    </div>
+                </div>
             </div>
         );
     }

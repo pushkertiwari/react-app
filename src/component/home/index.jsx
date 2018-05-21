@@ -13,8 +13,12 @@ class Index extends Component{
         this.updateState = this.updateState.bind(this);
     }
     updateState(num) {
-        this.setState({ data: 'Data updated from the child component...' })
         console.log(num);
+        if (num !== null && num !== undefined && num !== '') {
+            this.setState({ data: 'Data updated' })
+        } else {
+            this.setState({ data: '' })
+        }
     }
 
     render() {

@@ -96,8 +96,6 @@ class App extends Component {
             </div>
             <div className="navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                {/* <li data-id={'home'} onClick={this.handleCLick}>Home</li>
-                <li data-id={'about'} onClick={this.handleCLick}>About</li> */}
                 {this.addListing()}
               </ul>
             </div>
